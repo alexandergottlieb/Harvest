@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Harvest</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript">
+
+        </script>
+        <style type="text/css">
+            .main_section{
+                font-family: montserrat_regular;
+                text-align: center;
+            }
+            h1 {
+                font-weight: bold;
+                font-size: 14.0vmin;
+            }
+            h2 {
+                font-weight: bold;
+                font-size: 3.0vmin;
+            }
+            h3 {
+                font-size: 2.0vmin;
+            }
+            .user_registration{
+                background-image: url('cover_image_2.jpg');
+                filter: saturate(200%);
+                box-shadow:0px 0px 0px 5000px rgba(0,0,0,0.4) inset;
+                font-family: montserrat_regular;
+                background-size: cover;
+                text-align: center;
+                color: white;
+            }
+            .user_registration_form{
+
+                /*background: rgb(0,0,0);
+                background: rgba(0,0,0,.5);
+                border: none;
+                border-radius: 0%;
+                font-weight: inherit;
+                color: whitesmoke; */
+                background: transparent;
+                border: none;
+                box-shadow:none;
+            }
+            .user_registration_form > .row > input[type~="password"],
+            .user_registration_form > .row > input[type~="password"]:focus {
+                background-color: transparent;
+                border: none;
+                outline: none;
+                box-shadow:none;
+                border-bottom: 2px solid whitesmoke;
+                color: whitesmoke;
+                font-family: montserrat_regular;
+                font-size: 2.0vmin;
+                text-align: center;
+
+                ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+                    color: whitesmoke;
+                }
+                :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                    color: whitesmoke;
+                    opacity:  1;
+                }
+                ::-moz-placeholder { /* Mozilla Firefox 19+ */
+                    color: whitesmoke;
+                    opacity:  1;
+                }
+                :-ms-input-placeholder { /* Internet Explorer 10-11 */
+                    color: whitesmoke;
+                }
+            }
+            .user_registration_form > .row > input[type~="text"],
+            .user_registration_form > .row > input[type~="text"]:focus {
+                background-color: transparent;
+                border: none;
+                outline: none;
+                box-shadow:none;
+                border-bottom: 2px solid whitesmoke;
+                color: whitesmoke;
+                font-family: montserrat_regular;
+                font-size: 2.0vmin;
+                text-align: center;
+
+            ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+                color: whitesmoke;
+            }
+            :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color: whitesmoke;
+                opacity:  1;
+            }
+            ::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color: whitesmoke;
+                opacity:  1;
+            }
+            :-ms-input-placeholder { /* Internet Explorer 10-11 */
+                color: whitesmoke;
+            }
+            }
+            ul {
+                list-style-type: none;
+                font-size: 2.0vmin;
+            }
+            @font-face {
+                font-family: 'montserrat_regular';
+                src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot');
+                src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.woff') format('woff'),
+                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.ttf') format('truetype'),
+                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.svg#montserratregular') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid main_section">
+            <div class="row user_registration">
+                <div class="row">
+                    <br> <br>
+                    <div class = "col-lg-12">
+                        <p> </p>
+                    </div>
+                    <br> <br>
+                </div>
+                <div class="row col-lg-12 registration_title">
+                    <br> <br>
+                    <h1>join the harvest.</h1>
+                    <br> <br>
+                </div>
+                <div class="row col-lg-8 col-lg-offset-2 col-xs-12 col-xs-offset-0">
+                    <div class="user_registration_form form-control form-group has-success has-feedback input-group">
+                        <div class="row col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+                            <input type="text"
+                                   id="registration_name_input"
+                                   class="form-control"
+                                   placeholder="Name"/>
+                        </div>
+
+                        <div class="row col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+                            <br> <br>
+                            <input type="text"
+                                   id="registration_email_input"
+                                   class="form-control"
+                                   placeholder="Email"/>
+
+                        </div>
+                        <div class="row col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+                            <br> <br>
+                            <input type="password"
+                                   id="registration_password_input"
+                                   class="form-control"
+                                   placeholder="Password"/>
+                        </div>
+                        <div class="row col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+                            <br> <br>
+                            <input type="password"
+                                   id="registration_password_confirm_input"
+                                   class="form-control"
+                                   placeholder="Confirm Password"/>
+                        </div>
+                        <div class="row col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+                            <br> <br>
+                            <input type="button" id="registration_submit"
+                                   class="glyphicon glyphicon-check btn btn-default"
+                                   value="join" style="font-family: montserrat_regular"
+                                   aria-hidden="true"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row footer_section">
+                <div class = "col-xs-12 col-md-2 col-md-offset-1 footer_customer_section">
+                    <h3>Customer service</h3>
+                    <hr>
+                    <ul style="text-align: left">
+                        <li> Contact us </li>
+                        <li><a href="user_login.html">Log in</a></li>
+                        <li><a href="user_registration.html"> Sign up </a></li>
+                        <li> My account </li>
+                    </ul>
+                </div>
+                <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_locations">
+                    <h3>Locations</h3>
+                    <hr>
+                    <ul style="text-align: left">
+                        <li> Durham </li>
+                        <li> Newcastle </li>
+                        <li> Manchester </li>
+                        <li> London </li>
+                    </ul>
+
+                </div>
+                <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_about_us">
+                    <h3>About us</h3>
+                    <hr>
+                    <ul style="text-align: left">
+                        <li> How do we use cookies? </li>
+                        <li> Privacy policy </li>
+                        <li> How we started </li>
+                        <li> Our mission statement </li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
