@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>item_browse</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript">
+
+        </script>
+        <style>
+            .main_section{
+                font-family: montserrat_regular;
+                text-align: center;
+            }
+            .cover_section {
+                background-image: url('cover_image_5.jpg');
+                filter: saturate(200%);
+                font-family: montserrat_regular;
+                background-size: cover;
+                text-align: center;
+                color: white;
+                box-shadow:0px 0px 0px 5000px rgba(0,0,0,0.4) inset;
+            }
+            .item_filtering {
+                outline: auto gray;
+            }
+            .item_display {
+                outline: auto gray;
+            }
+            .item_tile{
+                overflow: hidden;
+                position: relative;
+                display: block;
+                margin-bottom: -1px;
+                background-color: lightgrey;
+            }
+            .item_tile_image {
+                max-width: 100px;
+            }
+            .item_button_group {
+                display: inline-block;
+                vertical-align: middle;
+                float: none;
+            }
+            .item_button {
+                border-radius: 0px;
+                align-self: center;
+            }
+            .item_search_input > input[type~="text"],
+            .item_search_input > input[type~="text"]:focus {
+                background-color: transparent;
+                border: none;
+                outline: none;
+                box-shadow: none;
+                border-radius: 0px;
+                border-bottom: 2px solid whitesmoke;
+                color: whitesmoke;
+                font-family: montserrat_regular;
+                font-size: 2.0vmin;
+                text-align: center;
+
+                ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+                    color: whitesmoke;
+                }
+
+                :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                    color: whitesmoke;
+                    opacity: 1;
+                }
+
+                ::-moz-placeholder { /* Mozilla Firefox 19+ */
+                    color: whitesmoke;
+                    opacity: 1;
+                }
+
+                :-ms-input-placeholder { /* Internet Explorer 10-11 */
+                    color: whitesmoke;
+                }
+            }
+            h1 {
+                font-weight: bold;
+                font-size: 14.0vmin;
+                color: whitesmoke;
+            }
+            h2 {
+                font-weight: bold;
+                font-size: 3.0vmin;
+                color: whitesmoke;
+            }
+            h3 {
+                font-weight: bold;
+                font-size: 2.0vmin;
+                color: whitesmoke;
+            }
+            h4 {
+                font-weight: bold;
+                font-size: 1.75vmin;
+                color: whitesmoke;
+                font-family: montserrat_regular;
+            }
+            h5 {
+                font-weight: bold;
+                font-size: 1.75vmin;
+                color: gray;
+                font-family: montserrat_regular;
+
+            }
+            button {
+              border: black solid;
+              border-radius: 5px;
+              font-family: montserrat_regular;
+              font-weight: bold;
+              color: whitesmoke;
+            }
+            .footer_section{
+
+            }
+            ul {
+                list-style-type: none;
+                font-size: 2.0vmin;
+            }
+            @font-face {
+                font-family: 'montserrat_regular';
+                src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot');
+                src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.woff') format('woff'),
+                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.ttf') format('truetype'),
+                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.svg#montserratregular') format('svg');
+                font-weight: normal;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "container-fluid main_section">
+            <div class="row cover_section">
+                <div class = "row ">
+                    <div class = "row col-lg-12">
+                        <h1> search for food. </h1>
+                    </div>
+                    <br> <br>
+                </div>
+                <div class = "row">
+                    <br>
+                    <div class = "row col-lg-12">
+                        <h2> search using the text field below, filter using the options on the side. </h2>
+                    </div>
+                    <br>
+                    <div class = "row">
+                        <div class="col-md-8 col-md-offset-2 item_search_input">
+                            <br> <br>
+                            <input type="text"
+                                   id="item_search_input"
+                                   class="form-control"
+                                   placeholder="what do you fancy?"/>
+                            <br> <br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br> <br>
+
+            <div class = "row item_search">
+                <div class="row">
+                    <!-- selection pane for filtering items displayed goes here -->
+                    <div class="col-md-3 col-md-offset-1 col-xs-12 item_filtering">
+                        <h5> filter items. </h5>
+                        <hr>
+                        <div class = "row">
+                            <div class = "col-lg-12">
+                                <h5>filter by distance (miles)</h5>
+                            </div>
+                        </div>
+                        <div class = "row">
+                          <form method="post" action="demoform.asp" class = "col-xs-8 col-xs-offset-2">
+                            <input type="range" name="points" id="points" value="5" min="0" max="10">
+                          </form>
+                        </div>
+                        <div class = "row">
+                            <div class = "col-lg-12">
+                                <h5>filter by expiration date</h5>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                                <option selected>select an expiration date</option>
+                                <option value="0">Expires today</option>
+                                <option value="1">Expires tomorrow or earlier</option>
+                                <option value="3">Expires in a week or earlier</option>
+                                <option value="4">Expires in over a week</option>
+                            </select>
+                        </div>
+                        <div class = "row">
+                            <div class = "col-lg-12">
+                                <h5>filter by food type</h5>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                                <option selected>select a food type</option>
+                                <option value="0">fruit and vegetables</option>
+                                <option value="1">tins and cans</option>
+                                <option value="3">microwavable food</option>
+                                <option value="4">drinks</option>
+                            </select>
+                        </div>
+                        <div class = "row">
+                            <div class = "col-lg-12">
+                                <h5>filter by date added</h5>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <button type="button" class="item_button btn glyphicon glyphicon-ok">
+                                update.
+                            </button>
+                        </div>
+                        <br>
+                    </div>
+                    <!-- list of item tiles is displayed here -->
+                    <div class="col-md-6 col-md-offset-1 col-xs-12 item_display">
+                        <h5> find food </h5>
+                        <hr>
+                            <div class="row list-group">
+                                <a href="#" class="list-group-item item_tile col-xs-10 col-xs-offset-1">
+                                    <div class="col-lg-4">
+                                        <img src="banana.png" class="item_tile_image">
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h5 class="item_tile_name">Item Name</h5>
+                                        <p class="item_tile_distance">Item Distance</p>
+                                        <p class="item_tile_description">Item Description</p>
+                                    </div>
+                                    <div class="col-lg-4 item_button_group btn-block">
+                                        <button type="button"
+                                                class="item_button item_tile_show_map btn glyphicon
+                                                glyphicon-map-marker">
+                                            show on map.
+                                        </button>
+                                        <button type="button"
+                                                class="item_button item_tile_show_details btn glyphicon
+                                                glyphicon-option-horizontal">
+                                            show more details.
+                                        </button>
+                                        <button type="button"
+                                                class="item_button item_tile_reserve btn glyphicon
+                                                glyphicon-grain">
+                                            reserve.
+                                        </button>
+                                    </div>
+                                    <hr>
+                                </a>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <br> <br>
+
+            <div class="row footer_section">
+                <div class = "col-xs-12 col-md-2 col-md-offset-1 footer_customer_section">
+                    <h5>Customer service</h5>
+                    <hr>
+                    <ul style="text-align: left">
+                        <li> Contact us </li>
+                        <li><a href="user_login.html">Log in</a></li>
+                        <li><a href="user_registration.html"> Sign up </a></li>
+                        <li><a href="user_account.html">My account</a> </li>
+                    </ul>
+                </div>
+                <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_locations">
+                    <h5>Search for food</h5>
+                    <hr>
+                    <ul style="text-align: left">
+                        <li> Popular </li>
+                        <li> Just 10 minutes away </li>
+                        <li> Search by type </li>
+                        <li> Add food </li>
+                    </ul>
+
+                </div>
+                <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_about_us">
+                    <h5>About us</h5>
+                    <hr>
+                    <ul style="text-align: left">
+                        <li> How do we use cookies? </li>
+                        <li> Privacy policy </li>
+                        <li> How we started </li>
+                        <li> Our mission statement </li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
