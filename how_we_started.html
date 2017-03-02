@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Harvest</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+
+
+    </script>
+    <style type = "text/css">
+        body {
+            border: none;
+            outline: none;
+        }
+        .main_section{
+            font-family: montserrat_regular;
+            text-align: center;
+        }
+        .cover_section {
+            background-image: url('cover_image_9.jpg');
+            filter: saturate(200%);
+            font-family: montserrat_regular;
+            background-size: cover;
+            text-align: center;
+            color: white;
+            box-shadow:0px 0px 0px 5000px rgba(0,0,0,0.4) inset;
+
+        }
+        h1 {
+            font-weight: bold;
+            font-size: 14.0vmax;
+        }
+        h2 {
+            font-weight: bold;
+            font-size: 3.0vmax;
+        }
+        h3 {
+            font-size: 2.0vmax;
+        }
+        .postcode_search {
+            /*
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.5);
+            */
+            font-weight: inherit;
+            color: whitesmoke;
+        }
+        #postcode_search_input {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            border-bottom: 2px solid whitesmoke;
+            color: whitesmoke;
+            font-family: montserrat_regular;
+            font-size: 2.0vmax;
+            text-align: center;
+            outline: 0;
+
+        }
+        .footer_section{
+
+        }
+        .member_photo {
+            border-radius: 50%;
+            max-height: inherit;
+        }
+        .member_section {
+            text-align: center;
+            color: white;
+            box-shadow:rgba(0,0,0,0.4) inset;
+        }
+        ul {
+            list-style-type: none;
+            font-size: 1.5vmax;
+            align-self: center;
+            text-align: center;
+        }
+        .postcode_search_submit {
+            align-self: center;
+            font-size: 1.5vmax;
+        }
+        @font-face {
+            font-family: 'montserrat_regular';
+            src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot');
+            src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+            url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.woff') format('woff'),
+            url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.ttf') format('truetype'),
+            url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.svg#montserratregular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+        button {
+            padding-left: 50%;
+            font-family: montserrat_regular;
+        }
+
+    </style>
+</head>
+<body>
+<div class = "container-fluid main_section">
+    <!-- Header / navigation bar-->
+
+    <!-- Cover section-->
+    <div class="row cover_section">
+        <div class="row">
+            <br> <br>
+            <div class = "col-lg-12">
+                <p> </p>
+            </div>
+            <br> <br>
+        </div>
+        <div class = "row">
+            <br> <br>
+            <div class = "col-lg-12">
+                <h1> how we started. </h1>
+            </div>
+        </div>
+        <div class = "row">
+            <br> <br>
+            <div class = "col-lg-12">
+                <h2> meet the team. </h2>
+            </div>
+            <br> <br>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class ="member_row form-inline col-md-10 col-md-offset-1">
+                <div class = "row">
+                    <div class = "member_section col-lg-6">
+                        <img class="member_photo col-lg-3" src="member_photo.jpg"/>
+                        <div class="col-lg-9">
+                            <h3 class = "member_name"> alexander gottleib. </h3>
+                            <hr>
+                            <h4 class = "member_role"> "Ayo it's my world and I won't stop
+                                and if you stand in my way you bound to get popped."</h4>
+                            <h4 class = "member_contact"> contact: xander@email.com</h4>
+                        </div>
+                    </div>
+                    <div class = "member_section col-lg-6">
+                        <img class="member_photo col-lg-3" src="member_photo.jpg"/>
+                        <div class="col-lg-9">
+                            <h3 class = "member_name"> jack binney. </h3>
+                            <hr>
+                            <h4 class = "member_role"> "They give us guns and drugs
+                                Then wonder why in the fuck we thugs
+                                They wanna count the slugs
+                                Then come around here and fuck with us."</h4>
+                            <h4 class = "member_contact"> contact: binney@email.com</h4>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <div class = "row">
+                    <div class = "member_section col-lg-6">
+                        <img class="member_photo col-lg-3" src="member_photo.jpg"/>
+                        <div class="col-lg-9">
+                            <h3 class = "member_name"> george price. </h3>
+                            <hr>
+                            <h4 class = "member_role"> "The Mobb comes equipped for warfare
+                                Beware of my crime family who got 'nough shots to share
+                                For all of those who wanna profile and pose." </h4>
+                            <h4 class = "member_contact"> contact: price@email.com</h4>
+                        </div>
+                    </div>
+                    <div class = "member_section col-lg-6">
+                        <img class="member_photo col-lg-3" src="member_photo.jpg"/>
+                        <div class="col-lg-9">
+                            <h3 class = "member_name"> tom lafferty. </h3>
+                            <hr>
+                            <h4 class = "member_role"> "From N.W.A, from black and the gray
+                                From choking a bitch to smacking her face
+                                From stacking up bodies to racking AKs up
+                                From racking up hits to stacking them crates up."</h4>
+                            <h4 class = "member_contact"> contact: lafferty@email.com</h4>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <div class = "row">
+                    <div class = "member_section col-lg-6 col-lg-offset-3">
+                        <img class="member_photo col-lg-3" src="member_photo.jpg"/>
+                        <div class="col-lg-9">
+                            <h3 class = "member_name"> george dinning. </h3>
+                            <hr>
+                            <h4 class = "member_role"> "Cause I drink it anytime and anyplace
+                                When it's time to get ill I pour it on my face
+                                Monkey tastes Def when you pour it on ice
+                                Come on y'all it's time to get nice." </h4>
+                            <h4 class = "member_contact"> contact: dinning@email.com</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="row footer_section">
+        <div class = "col-xs-12 col-md-2 col-md-offset-1 footer_customer_section">
+            <h3>customers...</h3>
+            <hr>
+            <ul style="text-align: left">
+                <li><a href="contact_us.html"> contact us </a></li>
+                <li><a href="user_login.html">log in</a></li>
+                <li><a href="user_registration.html"> sign up </a></li>
+                <li><a href="user_account_basic.html">my account</a> </li>
+            </ul>
+        </div>
+        <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_locations">
+            <h3>search...</h3>
+            <hr>
+            <ul style="text-align: left">
+                <li><a href="index.html">home</a></li>
+                <li><a href="item_browse.html">popular</a></li>
+                <li><a href="add_food.html">add food</a></li>
+                <li><a href="search_users.html">search users</a> </li>
+            </ul>
+
+        </div>
+        <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_about_us">
+            <h3>about us...</h3>
+            <hr>
+            <ul style="text-align: left">
+                <li><a href="how_we_use_cookies.html">how do we use cookies?</a> </li>
+                <li><a href="privacy_policy.html">privacy policy</a></li>
+                <li><a href="how_we_started.html">how we started</a></li>
+                <li><a href="mission_statement.html">our mission statement </a></li>
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

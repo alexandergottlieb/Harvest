@@ -8,15 +8,25 @@
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript">
 
+            // TODO - functionality for searching for food items based on the entered post code
+            function postcodeSearch(){
+                var postcodeEntry = document.getElementById("postcode_search_input").value;
+                alert(postcodeEntry);
+
+            }
 
         </script>
         <style type = "text/css">
+            body {
+                border: none;
+                outline: none;
+            }
             .main_section{
                 font-family: montserrat_regular;
                 text-align: center;
             }
             .cover_section {
-                background-image: url('cover_image_4.jpg');
+                background-image: url('cover_image.jpg');
                 filter: saturate(200%);
                 font-family: montserrat_regular;
                 background-size: cover;
@@ -27,14 +37,14 @@
             }
             h1 {
                 font-weight: bold;
-                font-size: 14.0vmin;
+                font-size: 14.0vmax;
             }
             h2 {
                 font-weight: bold;
-                font-size: 3.0vmin;
+                font-size: 3.0vmax;
             }
             h3 {
-                font-size: 2.0vmin;
+                font-size: 2.0vmax;
             }
             .postcode_search {
                 /*
@@ -51,7 +61,7 @@
                 border-bottom: 2px solid whitesmoke;
                 color: whitesmoke;
                 font-family: montserrat_regular;
-                font-size: 2.0vmin;
+                font-size: 2.0vmax;
                 text-align: center;
                 outline: 0;
 
@@ -61,7 +71,13 @@
             }
             ul {
                 list-style-type: none;
-                font-size: 2.0vmin;
+                font-size: 1.5vmax;
+                align-self: center;
+                text-align: center;
+            }
+            .postcode_search_submit {
+                align-self: center;
+                font-size: 1.5vmax;
             }
             @font-face {
                 font-family: 'montserrat_regular';
@@ -98,7 +114,6 @@
                     <div class = "col-lg-12">
                         <h1> harvest. </h1>
                     </div>
-                    <br> <br>
                 </div>
                 <div class = "row">
                     <br> <br>
@@ -122,7 +137,7 @@
                                 <input type="text"
                                        id="postcode_search_input"
                                        class="postcode_search_input form-control"
-                                       placeholder="Enter postcode"/>
+                                       placeholder="enter postcode"/>
 
                             </div>
 
@@ -131,8 +146,8 @@
                                 <br>
                                 <input type="button" id="postcode_search_submit"
                                        class="glyphicon glyphicon-check btn btn-default postcode_search_submit"
-                                       value="Search" style="font-family: montserrat_regular"
-                                       aria-hidden="true"/>
+                                       value="search" style="font-family: montserrat_regular"
+                                       aria-hidden="true" onclick="postcodeSearch()"/>
                                 <br>
                                 <br>
                             </div>
@@ -148,34 +163,35 @@
             </div>
             <div class="row footer_section">
                 <div class = "col-xs-12 col-md-2 col-md-offset-1 footer_customer_section">
-                    <h3>Customer service</h3>
+                    <h3>customers...</h3>
                     <hr>
                     <ul style="text-align: left">
-                        <li> Contact us </li>
-                        <li><a href="user_login.html">Log in</a></li>
-                        <li><a href="user_registration.html"> Sign up </a></li>
-                        <li> My account </li>
+                        <li><a href="contact_us.html"> contact us </a></li>
+                        <li><a href="user_login.html">log in</a></li>
+                        <li><a href="user_registration.html"> sign up </a></li>
+                        <li><a href="user_account_basic.html">my account</a> </li>
+                        <li><a href="messenger.html">messenger</a></li>
                     </ul>
                 </div>
                 <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_locations">
-                    <h3>Locations</h3>
+                    <h3>search...</h3>
                     <hr>
                     <ul style="text-align: left">
-                        <li> Durham </li>
-                        <li> Newcastle </li>
-                        <li> Manchester </li>
-                        <li> London </li>
+                        <li><a href="index.html">home</a></li>
+                        <li><a href="item_browse.html">popular</a></li>
+                        <li><a href="add_food.html">add food</a></li>
+                        <li><a href="search_users.html">search users</a> </li>
                     </ul>
 
                 </div>
                 <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_about_us">
-                    <h3>About us</h3>
+                    <h3>about us...</h3>
                     <hr>
                     <ul style="text-align: left">
-                        <li> How do we use cookies? </li>
-                        <li> Privacy policy </li>
-                        <li> How we started </li>
-                        <li> Our mission statement </li>
+                        <li><a href="how_we_use_cookies.html">how do we use cookies?</a> </li>
+                        <li><a href="privacy_policy.html">privacy policy</a></li>
+                        <li><a href="how_we_started.html">how we started</a></li>
+                        <li><a href="mission_statement.html">our mission statement </a></li>
                     </ul>
 
                 </div>

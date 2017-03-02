@@ -8,8 +8,20 @@
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript">
 
+            // TODO - functionality to login to the website using an entered email and password
+            function login(){
+                var emailEntry = document.getElementById("login_email_input").value;
+                var passwordEntry = document.getElementById("login_password_input").value;
+                alert(emailEntry);
+                alert(passwordEntry);
+            }
         </script>
         <style type="text/css">
+            body {
+                border: none;
+                outline: none;
+                box-shadow: none;
+            }
             .main_section{
                 font-family: montserrat_regular;
                 text-align: center;
@@ -26,19 +38,27 @@
             }
             .user_login_form {
                 background: none;
+                outline: none;
                 border: none;
+                box-shadow: none;
                 border-radius: 0%;
                 font-weight: inherit;
                 color: whitesmoke;
             }
-            .user_login_form > .row > input[type~="text"] {
+            .user_login_form > .row > input[type~="text"],
+            .user_login_form > .row > input[type~="text"]:focus,
+            .user_login_form > .row > input[type~="password"],
+            .user_login_form > .row > input[type~="password"]:focus{
                 background-color: transparent;
                 border: none;
+                outline: none;
+                box-shadow:none;
                 border-bottom: 2px solid whitesmoke;
                 color: whitesmoke;
                 font-family: montserrat_regular;
                 font-size: 2.0vmin;
                 text-align: center;
+
             ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
                 color: whitesmoke;
             }
@@ -53,20 +73,22 @@
             :-ms-input-placeholder { /* Internet Explorer 10-11 */
                 color: whitesmoke;
             }
+
+            }
             h1 {
                 font-weight: bold;
-                font-size: 14.0vmin;
+                font-size: 14.0vmax;
             }
             h2 {
                 font-weight: bold;
-                font-size: 3.0vmin;
+                font-size: 3.0vmax;
             }
             h3 {
-                font-size: 2.0vmin;
+                font-size: 2.0vmax;
             }
             ul {
                 list-style-type: none;
-                font-size: 2.0vmin;
+                font-size: 1.5vmax;
             }
             @font-face {
                 font-family: 'montserrat_regular';
@@ -95,27 +117,30 @@
                         <br> <br>
                     </div>
                 </div>
+                <br> <br>
                 <div class = "row ">
                     <div class="user_login_form form-control form-group has-success has-feedback input-group ">
-                        <div class="row col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+                        <div class="row col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
                             <input type="text"
                                    id="login_email_input"
                                    class="form-control"
-                                   placeholder="Name"/>
+                                   placeholder="enter your name"/>
                         </div>
-                        <div class="row col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+                        <br> <br>
+                        <div class="row col-lg-8 col-lg-offset-2 col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
                             <br> <br>
-                            <input type="text"
-                                   id="registration_password_input"
+                            <input type="password"
+                                   id="login_password_input"
                                    class="form-control"
-                                   placeholder="Password"/>
+                                   placeholder="enter your password"/>
                         </div>
+                        <br> <br>
                         <div class="row col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
                             <br> <br>
-                            <input type="button" id="registration_submit"
+                            <input type="button" id="login_submit"
                                    class="glyphicon glyphicon-check btn btn-default"
                                    value="join us" style="font-family: montserrat_regular"
-                                   aria-hidden="true"/>
+                                   aria-hidden="true" onclick="login()"/>
                         </div>
                     </div>
 
@@ -123,34 +148,34 @@
             </div>
             <div class="row footer_section">
                 <div class = "col-xs-12 col-md-2 col-md-offset-1 footer_customer_section">
-                    <h3>Customer service</h3>
+                    <h3>customers...</h3>
                     <hr>
                     <ul style="text-align: left">
-                        <li> Contact us </li>
-                        <li><a href="user_login.html">Log in</a></li>
-                        <li><a href="user_registration.html"> Sign up </a></li>
-                        <li> My account </li>
+                        <li><a href="contact_us.html"> contact us </a></li>
+                        <li><a href="user_login.html">log in</a></li>
+                        <li><a href="user_registration.html"> sign up </a></li>
+                        <li><a href="user_account_basic.html">my account</a> </li>
                     </ul>
                 </div>
                 <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_locations">
-                    <h3>Locations</h3>
+                    <h3>search...</h3>
                     <hr>
                     <ul style="text-align: left">
-                        <li> Durham </li>
-                        <li> Newcastle </li>
-                        <li> Manchester </li>
-                        <li> London </li>
+                        <li><a href="index.html">home</a></li>
+                        <li><a href="item_browse.html">popular</a></li>
+                        <li><a href="add_food.html">add food</a></li>
+                        <li><a href="search_users.html">search users</a> </li>
                     </ul>
 
                 </div>
                 <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_about_us">
-                    <h3>About us</h3>
+                    <h3>about us...</h3>
                     <hr>
                     <ul style="text-align: left">
-                        <li> How do we use cookies? </li>
-                        <li> Privacy policy </li>
-                        <li> How we started </li>
-                        <li> Our mission statement </li>
+                        <li><a href="how_we_use_cookies.html">how do we use cookies?</a> </li>
+                        <li><a href="privacy_policy.html">privacy policy</a></li>
+                        <li><a href="how_we_started.html">how we started</a></li>
+                        <li><a href="mission_statement.html">our mission statement </a></li>
                     </ul>
 
                 </div>

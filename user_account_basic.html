@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Harvest</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript">
+
+
+        </script>
+        <style type="text/css">
+            .main_section{
+                font-family: montserrat_regular;
+                text-align: center;
+                background-color: whitesmoke;
+            }
+            input[type~="password"], input[type~="text"] {
+                background-color: transparent;
+                border-radius: 0;
+                border: none;
+                outline: none;
+                box-shadow:none;
+                border-bottom: 2px solid whitesmoke;
+                color: whitesmoke;
+                font-family: montserrat_regular;
+                font-size: 2.0vmin;
+                text-align: center;
+
+            ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+                color: whitesmoke;
+            }
+            :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color: whitesmoke;
+                opacity:  1;
+            }
+            ::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color: whitesmoke;
+                opacity:  1;
+            }
+            :-ms-input-placeholder { /* Internet Explorer 10-11 */
+                color: whitesmoke;
+            }
+            }
+            h1 {
+                font-weight: bold;
+                font-size: 14.0vmin;
+            }
+            h2 {
+                font-weight: bold;
+                font-size: 3.0vmin;
+            }
+            h3 {
+                font-size: 2.0vmin;
+            }
+            ul {
+                list-style-type: none;
+                font-size: 2.0vmin;
+            }
+            @font-face {
+                font-family: 'montserrat_regular';
+                src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot');
+                src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.woff') format('woff'),
+                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.ttf') format('truetype'),
+                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.svg#montserratregular') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid main_section">
+            <div class="row col-lg-12">
+                <br><br>
+                <h1>
+                    change your account.
+                </h1>
+                <br><br>
+            </div>
+            <div class="row edit_section col-lg-12">
+                <div class="row list-group edit_section_choose col-lg-4 col-xs-12">
+                    <a href="user_account_basic.html" class="list-group-item active">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Basic account settings</h5>
+                            <small>Last updated 3 days ago</small>
+                        </div>
+                        <p class="mb-1">Edit your account's display name, profile picture, email settings.</p>
+                    </a>
+                    <a href="user_account_security.html" class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Security settings</h5>
+                            <small>Last updated 2 days ago</small>
+                        </div>
+                        <p class="mb-1">Edit your password, alternate contact information, and backup settings.</p>
+                    </a>
+                    <a href="user_account_network.html" class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Network and sharing settings</h5>
+                            <small>Last updated over a month ago</small>
+                        </div>
+                        <p class="mb-1">Edit what information is displayed and shared through the website.</p>
+                    </a>
+                </div>
+                <div class="row col-lg-8 col-xs-12">
+                    <h2>Basic account settings</h2>
+                    <hr>
+                    <div class = "form-horizontal edit_section_entry">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"> Display Name: </label>
+                            <div class = "col-sm-10">
+                                <input type="text" class="form-control" id="edit_account_display_name"
+                                       placeholder="Display name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"> Email address: </label>
+                            <div class = "col-sm-10">
+                                <input type="text" class="form-control" id="edit_account_email"
+                                       placeholder="Email address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"> Phone Number: </label>
+                            <div class = "col-sm-10">
+                                <input type="text" class="form-control" id="edit_account_phone"
+                                       placeholder="Phone number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"> Profile Picture: </label>
+                            <div class = "col-sm-5">
+                                <button type="button" class="form-control"
+                                       id="edit_account_profile_picture_take">
+                                    <span class="glyphicon glyphicon-camera"></span> Take photo
+                                </button>
+                            </div>
+                            <div class = "col-sm-5">
+                                <button type="button" class="form-control"
+                                        id="edit_account_profile_picture_upload">
+                                    <span class="glyphicon glyphicon-upload"></span> Upload photo
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"> </label>
+                            <div class = "col-sm-10">
+                                <input type="button" class="form-control" id="edit_account_submit"
+                                       value="Save changes">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row footer_section">
+                <div class = "col-xs-12 col-md-2 col-md-offset-1 footer_customer_section">
+                    <h3>customers...</h3>
+                    <hr>
+                    <ul style="text-align: left">
+                        <li><a href="contact_us.html"> contact us </a></li>
+                        <li><a href="user_login.html">log in</a></li>
+                        <li><a href="user_registration.html"> sign up </a></li>
+                        <li><a href="user_account_basic.html">my account</a> </li>
+                    </ul>
+                </div>
+                <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_locations">
+                    <h3>search...</h3>
+                    <hr>
+                    <ul style="text-align: left">
+                        <li><a href="index.html">home</a></li>
+                        <li><a href="item_browse.html">popular</a></li>
+                        <li><a href="add_food.html">add food</a></li>
+                        <li><a href="search_users.html">search users</a> </li>
+                    </ul>
+
+                </div>
+                <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_about_us">
+                    <h3>about us...</h3>
+                    <hr>
+                    <ul style="text-align: left">
+                        <li><a href="how_we_use_cookies.html">how do we use cookies?</a> </li>
+                        <li><a href="privacy_policy.html">privacy policy</a></li>
+                        <li><a href="how_we_started.html">how we started</a></li>
+                        <li><a href="mission_statement.html">our mission statement </a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -4,35 +4,147 @@
         <meta charset="UTF-8">
         <title>item_browse</title>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-        <script type="text/javascript"></script>
+        <script type="text/javascript">
+
+            function sortByAscending(a, b) {
+                if (a["name"] < b["name"]) return -1;
+                if(a["name"] > b["name"]) return 1;
+                return 0;
+            }
+
+            function sortByDescending(a, b) {
+                if (a["name"] > b["name"]) return -1;
+                if(a["name"] < b["name"]) return 1;
+                return 0;
+            }
+
+            function sortByDistance(a, b) {
+                if (a["distance"] < b["distance"]) return -1;
+                if(a["distance"] > b["distance"]) return 1;
+                return 0;
+            }
+
+            function sortByExpiryShortest(a, b) {
+                if (a["expiry"] < b["expiry"]) return -1;
+                if(a["expiry"] > b["expiry"]) return 1;
+                return 0;
+            }
+
+            function sortByExpiryLongest(a, b) {
+                if (a["expiry"] > b["expiry"]) return -1;
+                if(a["expiry"] < b["expiry"]) return 1;
+                return 0;
+            }
+
+            function resetItemsList() {
+                // var reset = $("<div class='col-md-4 col-md-offset-4 col-xs-12'><h5>Find Food</h5></div><div class='col-md-4 col-xs-12'><select id='sortBy' style='margin-top: 10px;''><option selected value='0'>Sort By: ...</option><option value='1'>Ascending</option><option value='2'>Descending</option><option value='3'>Distance</option><option value='4'>Expiry Date (Shortest)</option><option value='5'>Expiry Date (Longest)</option></select></div>");
+                // $(".item_display").empty().append(reset);
+                $(".item_display").empty();
+            }
+
+            $(document).ready(function() {
+                $("#distanceFilter").on("input change", function() {
+                    if ($("#distanceFilter").val() == 1) {
+                        $("#distanceFilterValue").text("Distance: 1 mile");    
+                    }
+                    else {
+                        $("#distanceFilterValue").text("Distance: " + $("#distanceFilter").val() + " miles");
+                    }
+                });
+
+                $("#updateButton").click(function() {
+                    // $(".item_display").empty().append("<h5>Find Food</h5><hr>");
+                    resetItemsList();
+                    var query = "distance=" + $("#distanceFilter").val()
+                    if ($("#expirationFilter").val() != 0) {
+                        query = query + "&expiration=" + $("#expirationFilter").val();
+                    }
+                    if ($("#typeFilter").val() != 0) {
+                        query = query + "&type=" + $("#typeFilter").val();
+                    }
+                    drawRadius($("#distanceFilter").val());
+                    getItems(query);
+                });
+
+                $("#item_search_input").keypress(function(e) {
+                    if(e.which == 13 && $("#item_search_input").length > 0) {
+                        resetItemsList();
+                        // $(".item_display").empty().append("<h5>Find Food</h5><hr>");
+                        var query = "distance=" + $("#distanceFilter").val()
+                        if ($("#expirationFilter").val() != 0) {
+                            query = query + "&expiration=" + $("#expirationFilter").val();
+                        }
+                        if ($("#typeFilter").val() != 0) {
+                            query = query + "&type=" + $("#typeFilter").val();
+                        }
+                        codeAddress($("#item_search_input").val(), query);
+                    }
+                })
+
+                $(document).on("change", "#sortBy", function() {
+                    if ($("#sortBy").val() == 1) {
+                        items.sort(sortByAscending);
+                    }
+                    else if ($("#sortBy").val() == 2) {
+                        items.sort(sortByDescending);
+                    }
+                    else if ($("#sortBy").val() == 3) {
+                        items.sort(sortByDistance);   
+                    }
+                    else if ($("#sortBy").val() == 4) {
+                        items.sort(sortByExpiryShortest);
+                    }
+                    else if ($("#sortBy").val() == 5) {
+                        items.sort(sortByExpiryLongest);
+                    }
+                    // $(".item_display").empty();
+                    resetItemsList();
+                    for (item in items) {
+                        addItemToItemsList(items[item]);
+                    }
+                })
+            });
+        </script>
         <script src="map.js"></script>
         <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk6-0ijk4JTLjg5UGFZW3PI-D0GQlmZR8&callback=initMap">
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk6-0ijk4JTLjg5UGFZW3PI-D0GQlmZR8&callback=initMap">
         </script>
         <style>
+            body {
+                width: 100%;
+            }
             .main_section{
-                font-family: montserrat_regular;
+                font-family: 'Montserrat', sans-serif;
                 text-align: center;
             }
             #map {
                 height: 400px;
+                outline: auto gray;
+                margin-bottom: 2%;
             }
             .cover_section {
-                background-image: url('cover_image_5.jpg');
+                background-image: url('cover_image_6.jpg');
                 filter: saturate(200%);
-                font-family: montserrat_regular;
+                font-family: 'Montserrat', sans-serif;
                 background-size: cover;
                 text-align: center;
                 color: white;
                 box-shadow:0px 0px 0px 5000px rgba(0,0,0,0.4) inset;
             }
             .item_filtering {
+                height: 400px;
+                outline: auto gray;
+            }
+            .item_display_container {
                 outline: auto gray;
             }
             .item_display {
-                outline: auto gray;
+                max-height: 100vh;
+                overflow: auto;
+                /*outline: auto gray;*/
             }
             .item_tile{
                 overflow: hidden;
@@ -52,6 +164,7 @@
             .item_button {
                 border-radius: 0px;
                 align-self: center;
+                margin: 5px 5px;
             }
             .item_search_input > input[type~="text"],
             .item_search_input > input[type~="text"]:focus {
@@ -62,7 +175,7 @@
                 border-radius: 0px;
                 border-bottom: 2px solid whitesmoke;
                 color: whitesmoke;
-                font-family: montserrat_regular;
+                font-family: 'Montserrat', sans-serif;
                 font-size: 2.0vmin;
                 text-align: center;
 
@@ -84,38 +197,41 @@
                     color: whitesmoke;
                 }
             }
+            #item_search_input {
+                font-size: 2.0vmax;
+            }
             h1 {
                 font-weight: bold;
-                font-size: 14.0vmin;
+                font-size: 14.0vmax;
                 color: whitesmoke;
             }
             h2 {
                 font-weight: bold;
-                font-size: 3.0vmin;
+                font-size: 3.0vmax;
                 color: whitesmoke;
             }
             h3 {
                 font-weight: bold;
-                font-size: 2.0vmin;
+                font-size: 2.0vmax;
                 color: whitesmoke;
             }
             h4 {
                 font-weight: bold;
-                font-size: 1.75vmin;
+                font-size: 1.75vmax;
                 color: whitesmoke;
-                font-family: montserrat_regular;
+                font-family: 'Montserrat', sans-serif;
             }
             h5 {
                 font-weight: bold;
-                font-size: 1.75vmin;
+                font-size: 1.75vmax;
                 color: gray;
-                font-family: montserrat_regular;
+                font-family: 'Montserrat', sans-serif;
 
             }
             button {
               border: black solid;
               border-radius: 5px;
-              font-family: montserrat_regular;
+              font-family: 'Montserrat', sans-serif;
               font-weight: bold;
               color: whitesmoke;
             }
@@ -124,22 +240,18 @@
             }
             ul {
                 list-style-type: none;
-                font-size: 2.0vmin;
+                font-size: 2.0vmax;
             }
-            @font-face {
-                font-family: 'montserrat_regular';
-                src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot');
-                src: url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.woff') format('woff'),
-                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.ttf') format('truetype'),
-                url('fonts/Montserrat_Regular/Montserrat-Regular-webfont.svg#montserratregular') format('svg');
-                font-weight: normal;
+            .itemButton {
+                margin-left: 10px;
+                margin-right: 10px;
             }
         </style>
     </head>
     <body>
         <div class = "container-fluid main_section">
             <div class="row cover_section">
+                <br> <br>
                 <div class = "row ">
                     <div class = "row col-lg-12">
                         <h1> search for food. </h1>
@@ -149,7 +261,8 @@
                 <div class = "row">
                     <br>
                     <div class = "row col-lg-12">
-                        <h2> search using the text field below, filter using the options on the side. </h2>
+                        <h2> search using the text field below. </h2>
+                        <h2> filter using the options on the side. </h2>
                     </div>
                     <br>
                     <div class = "row">
@@ -171,130 +284,140 @@
                 <div class="row">
                     <!-- selection pane for filtering items displayed goes here -->
                     <div class="col-md-3 col-md-offset-1 col-xs-12 item_filtering">
-                        <h5> filter items. </h5>
+                        <h5>Filter Results</h5>
                         <hr>
                         <div class = "row">
                             <div class = "col-lg-12">
-                                <h5>filter by distance (miles)</h5>
+                                <h5 id="distanceFilterValue">Distance: 5 miles</h5>
                             </div>
                         </div>
                         <div class = "row">
                           <form method="post" action="demoform.asp" class = "col-xs-8 col-xs-offset-2">
-                            <input type="range" name="points" id="points" value="5" min="0" max="10">
+                            <input type="range" name="distanceFilter" id="distanceFilter" value="5" min="1" max="10">
                           </form>
                         </div>
                         <div class = "row">
                             <div class = "col-lg-12">
-                                <h5>filter by expiration date</h5>
+                                <h5>Expiration Date:</h5>
                             </div>
                         </div>
                         <div class = "row">
-                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                                <option selected>select an expiration date</option>
-                                <option value="0">Expires today</option>
-                                <option value="1">Expires tomorrow or earlier</option>
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="expirationFilter">
+                                <option selected value="0">select an expiration date</option>
+                                <option value="1">Expires today</option>
+                                <option value="2">Expires tomorrow or earlier</option>
                                 <option value="3">Expires in a week or earlier</option>
                                 <option value="4">Expires in over a week</option>
                             </select>
                         </div>
                         <div class = "row">
                             <div class = "col-lg-12">
-                                <h5>filter by food type</h5>
+                                <h5>Food Type:</h5>
                             </div>
                         </div>
                         <div class = "row">
-                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                                <option selected>select a food type</option>
-                                <option value="0">fruit and vegetables</option>
-                                <option value="1">tins and cans</option>
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="typeFilter">
+                                <option selected value="0">select a food type</option>
+                                <option value="1">fruit and vegetables</option>
+                                <option value="2">tins and cans</option>
                                 <option value="3">microwavable food</option>
                                 <option value="4">drinks</option>
                             </select>
                         </div>
+                        <br>
                         <div class = "row">
-                            <div class = "col-lg-12">
-                                <h5>filter by date added</h5>
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <button type="button" class="item_button btn glyphicon glyphicon-ok">
+                            <button type="button" id="updateButton" class="item_button btn glyphicon glyphicon-ok">
                                 update.
                             </button>
                         </div>
                         <br>
                     </div>
-                    <!-- list of item tiles is displayed here -->
-                    <!-- <div class="col-md-6 col-md-offset-1 col-xs-12 item_display">
-                        <h5> find food </h5>
-                        <hr>
-                            <div class="row list-group">
-                                <a href="#" class="list-group-item item_tile col-xs-10 col-xs-offset-1">
-                                    <div class="col-lg-4">
-                                        <img src="banana.png" class="item_tile_image">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <h5 class="item_tile_name">Item Name</h5>
-                                        <p class="item_tile_distance">Item Distance</p>
-                                        <p class="item_tile_description">Item Description</p>
-                                    </div>
-                                    <div class="col-lg-4 item_button_group btn-block">
-                                        <button type="button"
-                                                class="item_button item_tile_show_map btn glyphicon
-                                                glyphicon-map-marker">
-                                            show on map.
-                                        </button>
-                                        <button type="button"
-                                                class="item_button item_tile_show_details btn glyphicon
-                                                glyphicon-option-horizontal">
-                                            show more details.
-                                        </button>
-                                        <button type="button"
-                                                class="item_button item_tile_reserve btn glyphicon
-                                                glyphicon-grain">
-                                            reserve.
-                                        </button>
-                                    </div>
-                                    <hr>
-                                </a>
-                            </div>
-                    </div> -->
+
                     <div class="col-md-6 col-md-offset-1 col-xs-12" id="map"></div>
 
+                    <!-- list of item tiles is displayed here -->
+
                 </div>
+
+                <div class = "row">
+                <div class="col-md-6 col-md-offset-3 col-xs-12 item_display_container">
+                    <div class="col-md-4 col-md-offset-4 col-xs-12"><h5>Find Food</h5></div>
+                    <div class="col-md-4 col-xs-12">
+                        <select id="sortBy" style="margin-top: 10px;">
+                            <option selected value="0">Sort By: ...</option>
+                            <option value="1">Ascending</option>
+                            <option value="2">Descending</option>
+                            <option value="3">Distance</option>
+                            <option value="4">Expiry Date (Shortest)</option>
+                            <option value="5">Expiry Date (Longest)</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 item_display"></div>
+                </div>
+                </div>
+
+                <!--
+                <div class="col-md-4 col-md-offset-4 col-xs-12"><h5>Find Food</h5></div>
+                    <div class="col-md-4 col-xs-12">
+                        <select id="sortBy" style="margin-top: 10px;">
+                        <option selected value="0">Sort By: ...</option>
+                        <option value="1">Ascending</option>
+                        <option value="2">Descending</option>
+                        <option value="3">Distance</option>
+                        <option value="4">Expiry Date (Shortest)</option>
+                        <option value="5">Expiry Date (Longest)</option>
+                    </select>
+                    </div>
+                    <div class="col-md-6 col-md-offset-3 col-xs-12 item_display">
+                        <div class="col-md-4 col-md-offset-4 col-xs-12">
+                        <h5>Find Food</h5>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                        <select id="sortBy" style="margin-top: 10px;">
+                            <option selected value="0">Sort By: ...</option>
+                            <option value="1">Ascending</option>
+                            <option value="2">Descending</option>
+                            <option value="3">Distance</option>
+                            <option value="4">Expiry Date (Shortest)</option>
+                            <option value="5">Expiry Date (Longest)</option>
+                        </select>
+                        </div>
+                    </div>
+                </div> -->
             </div>
 
             <br> <br>
 
             <div class="row footer_section">
                 <div class = "col-xs-12 col-md-2 col-md-offset-1 footer_customer_section">
-                    <h5>Customer service</h5>
+                    <h3>customers...</h3>
                     <hr>
                     <ul style="text-align: left">
-                        <li> Contact us </li>
-                        <li><a href="user_login.html">Log in</a></li>
-                        <li><a href="user_registration.html"> Sign up </a></li>
-                        <li><a href="user_account.html">My account</a> </li>
+                        <li><a href="contact_us.html"> contact us </a></li>
+                        <li><a href="user_login.html">log in</a></li>
+                        <li><a href="user_registration.html"> sign up </a></li>
+                        <li><a href="user_account_basic.html">my account</a> </li>
                     </ul>
                 </div>
                 <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_locations">
-                    <h5>Search for food</h5>
+                    <h3>search...</h3>
                     <hr>
                     <ul style="text-align: left">
-                        <li> Popular </li>
-                        <li> Just 10 minutes away </li>
-                        <li> Search by type </li>
-                        <li> Add food </li>
+                        <li><a href="index.html">home</a></li>
+                        <li><a href="item_browse.html">popular</a></li>
+                        <li><a href="add_food.html">add food</a></li>
+                        <li><a href="search_users.html">search users</a> </li>
                     </ul>
 
                 </div>
                 <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_about_us">
-                    <h5>About us</h5>
+                    <h3>about us...</h3>
                     <hr>
                     <ul style="text-align: left">
-                        <li> How do we use cookies? </li>
-                        <li> Privacy policy </li>
-                        <li> How we started </li>
-                        <li> Our mission statement </li>
+                        <li><a href="how_we_use_cookies.html">how do we use cookies?</a> </li>
+                        <li><a href="privacy_policy.html">privacy policy</a></li>
+                        <li><a href="how_we_started.html">how we started</a></li>
+                        <li><a href="mission_statement.html">our mission statement </a></li>
                     </ul>
 
                 </div>
