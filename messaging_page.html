@@ -1,0 +1,127 @@
+<html lang="en">
+  <head>
+    <title>Harvest</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link type="text/css" rel="stylesheet" href="style.css"></link>
+    <script type="text/javascript">
+      function exampleMessageSubmit(){
+        var messageText = document.getElementById("message_text_entry").value;
+
+        var gubs = '<p class="message_sent">'+messageText+'</p>';
+        console.log(gubs);
+        $(".msg_log").append(gubs);
+      }
+    </script>
+  </head>
+  <body class="container-fluid">
+    <main class="row">
+      <header class="messaging_section" style="background-image:url('home_cover_image.jpg')">
+        <div class="col-xs-22">
+            <h1>Messaging</h1>
+        </div>
+        <div class="col-md-4">
+          <h3>recent contacts</h3>
+          <div class="row list-group msg_member_select">
+              <a href="" class="list-group-item active">
+                  <div class="d-flex w-100 justify-content-between">
+                      <img class="chat_photo"src="member_pics/georgep.jpg"/>
+                      <h5 class="mb-1 chat_name">Member name</h5>
+                      <small class="chat_details">Last message received: dd/mm/yyyy hh:mm</small>
+                  </div>
+                  <p class="mb-1 chat_details_ext">Last message details</p>
+              </a>
+              <a href="" class="list-group-item">
+                  <div class="d-flex w-100 justify-content-between">
+                      <img class="chat_photo " src="member_pics/tom.jpg"/>
+                      <h5 class="mb-1 chat_name">Member name</h5>
+                      <small class="chat_details">Last message received: dd/mm/yyyy hh:mm</small>
+                  </div>
+                  <p class="mb-1 chat_details_ext">Last message details</p>
+              </a>
+              <a href="" class="list-group-item">
+                  <div class="d-flex w-100 justify-content-between">
+                      <img class="chat_photo " src="member_pics/xander.jpg"/>
+                      <h5 class="mb-1 chat_name">Member name</h5>
+                      <small class="chat_details">Last message received: dd/mm/yyyy hh:mm</small>
+                  </div>
+                  <p class="mb-1 chat_details_ext">Last message details</p>
+              </a>
+              <a href="" class="list-group-item">
+                  <div class="d-flex w-100 justify-content-between">
+                      <img class="chat_photo " src="member_pics/jack.jpg"/>
+                      <h5 class="mb-1 chat_name">Member name</h5>
+                      <small class="chat_details">Last message received: dd/mm/yyyy hh:mm</smal>
+                  </div>
+                  <p class="mb-1 chat_details_ext">Last message details</p>
+              </a>
+          </div>
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+          <h3>chat log</h3>
+          <div class="list-group msg_log">
+                <p class="message_received">
+                  Hey man, did you do that dirty code?
+                </p>
+                <p class="message_sent">
+                  Yeah, it's proper filthy though.
+                </p>
+                <p class="message_received">
+                  No worries, you're gonna get put on blast for it though.
+                </p>
+                <p class="message_sent">
+                  I'm really dreading it.
+                </p>
+                <p class="message_received">
+                  Not looking forward to certain team members giving me a good roast.
+                </p>
+                <p class="message_sent">
+                  True. But it's all in good bants though.
+                </p>
+                <p class="message_received">
+                  Very true, hopefully someone reads this message section so that they know how I truly feel inside.
+                </p>
+                <p class="message_received">
+                  I'm scarred by the previous meeting, I never look at my html code with the same confidence again.
+                </p>
+                <p class="message_sent">
+                  Your code was dodge af though.
+                </p>
+                <p class="message_received">
+                  Yeah can't deny that.
+                </p>
+                <p class="message_received">
+                  I wonder who will actually see this.
+                </p>
+                <p class="message_received">
+                  Whoever sees this, hmu with a private whatsapp message.
+                </p>
+                <p class="message_sent">
+                  Yeah, whoever takes the time to read this is da real mvp.
+                </p>
+                <p class="message_sent">
+                  Odds are that Xander and Jack read this.
+                </p>
+                <p class="message_sent">
+                  Accumulator on Xander giving me another roast.
+                </p>
+          </div>
+
+          <div class="input-group">
+            <input type="text"
+                   id="message_text_entry"
+                   class="message_text_entry form-control"
+                   placeholder="Enter item name"/>
+           <span class="input-group-btn">
+             <button type="button" class="form-control"
+                     id="message_send" onclick="exampleMessageSubmit()">
+                 send
+             </button>
+           </span>
+        </div>
+        </div>
+      </header>
+    </main>
+  </body>
+</html>

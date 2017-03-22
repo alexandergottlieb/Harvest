@@ -1,0 +1,80 @@
+<html lang="en">
+  <head>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+
+      // function for validating the tags entered by the user, and formatting
+      function validateTags(){
+        var rawTagEntry = document.getElementById("item_tags_entry").value;
+        var passFlag = true;
+
+        // document.getElementById("item_tags_entry").value = "";
+        for (var i = 0; i < rawTagEntry.split(',').length; i++) {
+          if(false)/* input validation check here against accepted tags */{
+            passFlag = false; break;
+          }
+        }
+
+        if(rawTagEntry==="") {
+          $("#item_tags_entry").css("border-bottom", "2px solid whitesmoke");
+        }
+        else if(passFlag){
+          $("#item_tags_entry").css("border-bottom", "2px solid green");
+        }
+        else {
+          $("#item_tags_entry").css("border-bottom", "2px solid red");
+        }
+      }
+
+    </script>
+  </head>
+  <body class="container-fluid">
+    <main class="row">
+      <header class="item_section" style="background-image:url('home_cover_image.jpg')">
+        <div class="col-md-12">
+            <h1>Share your food online</h1>
+            <h2>Fill in your details below</h2>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="item_entry form-inline col-md-10 col-md-offset-1">
+                <h3 class = "item_entry_text">Tell us about your food</h3>
+            </div>
+            <div class = "col-xs-8 col-xs-offset-2 input-group">
+                <input type="text"
+                       id="item_name_entry"
+                       class="item_name_entry form-control"
+                       placeholder="Enter item name"/>
+                 <button type="button" class="form-control"
+                         id="item_picture_select">
+                     <span class="glyphicon glyphicon-camera">
+                       Send us a cheeky pic ;) </span>
+                 </button>
+                 <input type="text"
+                        id="item_description_entry"
+                        class="item_description_entry form-control"
+                        placeholder="Enter item description"/>
+                  <input type="text"
+                         id="item_best_before_entry"
+                         class="item_best_before_entry form-control"
+                         placeholder="Enter best before date"
+                         type="date"/>
+                  <input type="text"
+                         id="item_tags_entry"
+                         class="item_tags_entry form-control"
+                         placeholder="Enter item tags"
+                         onchange="validateTags()"/>
+                 <input type="button" id="postcode_search_submit"
+                        class="glyphicon glyphicon-check btn btn-default postcode_search_submit"
+                        value="search" style="font-family: montserrat_regular"
+                        aria-hidden="true" onclick="postcodeSearch()"/>
+            </div>
+          </div>
+        </div>
+      </header>
+    </main>
+  </body>
+</html>
