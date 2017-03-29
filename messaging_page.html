@@ -7,11 +7,7 @@
     <link type="text/css" rel="stylesheet" href="style.css"></link>
     <script type="text/javascript">
       function exampleMessageSubmit(){
-        var messageText = document.getElementById("message_text_entry").value;
-
-        var gubs = '<p class="message_sent">'+messageText+'</p>';
-        console.log(gubs);
-        $(".msg_log").append(gubs);
+        $(".msg_log").append('<p class="message_sent">'+document.getElementById("message_text_entry").value+'</p>');
       }
     </script>
   </head>
@@ -52,7 +48,7 @@
                   <div class="d-flex w-100 justify-content-between">
                       <img class="chat_photo " src="member_pics/jack.jpg"/>
                       <h5 class="mb-1 chat_name">Member name</h5>
-                      <small class="chat_details">Last message received: dd/mm/yyyy hh:mm</smal>
+                      <small class="chat_details">Last message received: dd/mm/yyyy hh:mm</small>
                   </div>
                   <p class="mb-1 chat_details_ext">Last message details</p>
               </a>
@@ -62,7 +58,7 @@
           <h3>chat log</h3>
           <div class="list-group msg_log">
                 <p class="message_received">
-                  Hey man, did you do that dirty code?
+                    Hey man, did you do that dirty code?
                 </p>
                 <p class="message_sent">
                   Yeah, it's proper filthy though.
