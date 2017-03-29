@@ -1,29 +1,29 @@
 <?php 
 
 $testItems = array(array(
-    "lat" => 54.767953, 
-    "lng" => -1.574685,
+    "latitude" => 54.767953, 
+    "longitude" => -1.574685,
     "id" => 0,
     "type" => 'food',
     "name" => "Burger"
   ),
   array(
-    "lat" => 54.766672,
-    "lng" => -1.575490,
+    "latitude" => 54.766672,
+    "longitude" => -1.575490,
     "id" => 1,
     "type" => 'meat',
     "name" => "Fresh Pork"
   ),
   array(
-    "lat" => 54.767706, 
-    "lng" => -1.572749,
+    "latitude" => 54.767706, 
+    "longitude" => -1.572749,
     "id" => 2,
     "type" => 'fruit',
     "name" => "Bananas"
   ),
   array(
-    "lat" => 54.767898,
-    "lng" => -1.571783,
+    "latitude" => 54.767898,
+    "longitude" => -1.571783,
     "id" => 3,
     "type" => 'veg',
     "name" => "Carrots"
@@ -62,9 +62,9 @@ $icons = array(
   ),
 );
 
-function addItem($lat, $lng, $id, $type) {
-  // items.push({lat: lat, lng: lng, id: id, type: type});
-	array_push($testItems, array(lat => $lat, lng => $lng, id => $id, type => $type));
+function addItem($latitude, $longitude, $id, $type) {
+  // items.push({latitude: latitude, longitude: longitude, id: id, type: type});
+	array_push($testItems, array(latitude => $latitude, longitude => $longitude, id => $id, type => $type));
 }
 
 function removeItem($id) {
@@ -83,10 +83,10 @@ function rad($x) {
 
 function getDistance($p1, $p2) {
   $R = 6378137; // Earth’s mean radius in meter
-  $dLat = rad($p2["lat"] - $p1["lat"]);
-  $dLong = rad($p2["lng"] - $p1["lng"]);
-  $a = sin($dLat / 2) * sin($dLat / 2) +
-    cos(rad($p1["lat"])) * cos(rad($p2["lat"])) *
+  $dlatitude = rad($p2["latitude"] - $p1["latitude"]);
+  $dLong = rad($p2["longitude"] - $p1["longitude"]);
+  $a = sin($dlatitude / 2) * sin($dlatitude / 2) +
+    cos(rad($p1["latitude"])) * cos(rad($p2["latitude"])) *
     sin($dLong / 2) * sin($dLong / 2);
   $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
   $d = $R * $c;
@@ -97,7 +97,7 @@ function getItems($testItems) {
 	// SQL statements to fetch items given the $_GET criteria, in the mean while it just returns all items
 	// echo $_SERVER["QUERY_STRING"]."\r\n";
 	$results = array();
-	$location = array("lat" => $_GET["lat"], "lng" => $_GET["lng"]);
+	$location = array("latitude" => $_GET["latitude"], "longitude" => $_GET["longitude"]);
 	
  $query = array();
   if (isset($_GET["expiry"])) {

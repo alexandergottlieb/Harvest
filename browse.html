@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>item_browse</title>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+
+<script type="text/javascript">
+
+    function sortByAscending(a, b) {
+        if (a["name"] < b["name"]) return -1;
+        if(a["name"] > b["name"]) return 1;
+        return 0;
+    }
+
+    function sortByDescending(a, b) {
+        if (a["name"] > b["name"]) return -1;
+        if(a["name"] < b["name"]) return 1;
+        return 0;
+    }
+
+    function sortByDistance(a, b) {
+        if (a["distance"] < b["distance"]) return -1;
+        if(a["distance"] > b["distance"]) return 1;
+        return 0;
+    }
+
+    function sortByExpiryShortest(a, b) {
+        if (a["expiry"] < b["expiry"]) return -1;
+        if(a["expiry"] > b["expiry"]) return 1;
+        return 0;
+    }
+
+    function sortByExpiryLongest(a, b) {
+        if (a["expiry"] > b["expiry"]) return -1;
+        if(a["expiry"] < b["expiry"]) return 1;
+        return 0;
+    }
+
+    function resetItemsList() {
+        $("#itemsList").empty();
+    }
+
+    $(document).ready(function() {
+        $("#locationSearchInput").keypress(function(e) {
+            if(e.which == 13 && $("#locationSearchInput").val().length > 0) {
+                resetItemsList();
+                var query = formQuery()
+                codeAddress($("#locationSearchInput").val(), query);
+            }
+        })
+
+        $("#locationSearchButton").click(function() {
+            if($("#locationSearchInput").val().length > 0) {
+                resetItemsList();
+                var query = formQuery();
+                codeAddress($("#locationSearchInput").val(), query);
+            }
+        });
+
+        $("#distanceFilter").on("input change", function() {
+            if ($("#distanceFilter").val() == 1) {
+                $("#distanceFilterValue").text("Distance: 1 mile");    
+            }
+            else {
+                $("#distanceFilterValue").text("Distance: " + $("#distanceFilter").val() + " miles");
+            }
+            $("#distanceFilterValue").append("<span class='caret'></span>")
+            var query = formQuery();
+            getItems(query);
+        });
+
+        $(document).on("change", "#expirationFilter", function() {
+            var query = formQuery();
+            getItems(query);
+        });
+
+        $(document).on("change", "#typeFilter", function() {
+            var query = formQuery();
+            getItems(query);
+        });
+
+        $(document).on("change", "#sortBy", function() {
+            if ($("#sortBy").val() == 1) {
+                items.sort(sortByAscending);
+            }
+            else if ($("#sortBy").val() == 2) {
+                items.sort(sortByDescending);
+            }
+            else if ($("#sortBy").val() == 3) {
+                items.sort(sortByDistance);   
+            }
+            else if ($("#sortBy").val() == 4) {
+                items.sort(sortByExpiryShortest);
+            }
+            else if ($("#sortBy").val() == 5) {
+                items.sort(sortByExpiryLongest);
+            }
+            resetItemsList();
+            for (item in items) {
+                addItemToItemsList(items[item]);
+            }
+        })
+    });
+
+</script>
+
+<script src="map.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk6-0ijk4JTLjg5UGFZW3PI-D0GQlmZR8&callback=initMap">
+</script>
+
+<style>
+    body {
+        max-height: 100vh;
+        font-family: 'Montserrat', sans-serif;
+    }
+    hr {
+        margin: 5px 0;
+        border: 1px solid rgb(220, 220, 220);
+    }
+   /* h1 {
+        font-weight: bold;
+        font-size: 14.0vmax;
+        color: whitesmoke;
+    }
+    h2 {
+        font-weight: bold;
+        font-size: 3.0vmax;
+        color: whitesmoke;
+    }
+    h3 {
+        font-weight: bold;
+        font-size: 2.0vmax;
+        color: whitesmoke;
+    }
+    h4 {
+        font-weight: bold;
+        font-size: 1.75vmax;
+        color: whitesmoke;
+        font-family: 'Montserrat', sans-serif;
+    }
+    h5 {
+        font-weight: bold;
+        font-size: 1.75vmax;
+        color: gray;
+        font-family: 'Montserrat', sans-serif;
+
+    }*/
+    button {
+      border: black solid;
+      border-radius: 5px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      color: whitesmoke;
+    }
+    ul {
+        list-style-type: none;
+        font-size: 2.0vmax;
+    }
+    .nopadding {
+        padding: 0;
+    }
+    .nomargin {
+        margin: 0;
+    }
+    .header {
+        height: 60px;
+        background-color: black;
+    }
+    #itemsContainer {
+        height: calc(100vh - 60px);
+    }
+    .filters {
+        padding: 10px 0;
+        background-color: white;
+    }
+    .distanceDropdown {
+        padding: 5px 10px;
+        width: 100%;
+    }
+    #itemsList {
+        height: calc(100vh - 185px);
+        padding: 15px 0;
+        background-color: white;
+        overflow: auto;
+    }
+    .itemContainer {
+        height: auto;
+        border: 1px solid rgb(220, 220, 220);
+    }
+    .itemImageContainer { 
+        height: 100px;
+        background-color: red;
+    }
+    #map {
+        height: calc(100vh - 60px);
+    }
+</style>
+
+</head>
+<body>
+<div class = "container-fluid main_section">
+
+    <div class="row header"></div>
+    <div class="row">
+        <div class="col-xs-12 col-md-7" id="itemsContainer">
+            <div class="row filters">
+                <div class="col-xs-12 col-sm-3">
+                <div class="input-group add-on col-xs-12">
+                    <input class="form-control" id="locationSearchInput" placeholder="Where Are You?" type="text">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" id="locationSearchButton"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+                </div>
+                <div class="dropdown col-xs-12 col-sm-3">
+                    <button class="btn btn-default btn-block dropdown-toggle" id="distanceFilterValue" type="button" data-toggle="dropdown">Distance: 5 miles
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu distanceDropdown">
+                        <li><input type="range" name="distanceFilter" id="distanceFilter" value="5" min="1" max="10"></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <select class="form-control" id="expirationFilter">
+                        <option selected value="0">Expiration Date</option>
+                        <option value="1">Today</option>
+                        <option value="2">Tomorrow or Earlier</option>
+                        <option value="3">A Week or Earlier</option>
+                        <option value="4">Over a Week</option>
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <select class="form-control" id="typeFilter">
+                        <option selected value="0">Food Type</option>
+                        <option value="1">Meat and Fish</option>
+                        <option value="2">Fruit and Veg</option>
+                        <option value="3">Tinned Food</option>
+                        <option value="4">Drinks</option>
+                    </select>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div class="row filters">
+                <div class="col-xs-6"><h1 class="nomargin text-center">Find Food</h1></div>
+                <div class="col-xs-6">
+                    <select class="form-control" id="sortBy">
+                        <option selected value="1">Ascending</option>
+                        <option value="2">Descending</option>
+                        <option value="3">Distance</option>
+                        <option value="4">Expiry Date (Shortest)</option>
+                        <option value="5">Expiry Date (Longest)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" id="itemsList"></div>
+        </div>
+
+        <div class="col-xs-12 col-md-5 hidden-xs" id="map"></div>
+    </div>
+
+    <div class="row footer_section">
+        <div class = "col-xs-12 col-md-2 col-md-offset-1 footer_customer_section">
+            <h3>customers...</h3>
+            <hr>
+            <ul style="text-align: left">
+                <li><a href="contact_us.html"> contact us </a></li>
+                <li><a href="user_login.html">log in</a></li>
+                <li><a href="user_registration.html"> sign up </a></li>
+                <li><a href="user_account_basic.html">my account</a> </li>
+            </ul>
+        </div>
+        <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_locations">
+            <h3>search...</h3>
+            <hr>
+            <ul style="text-align: left">
+                <li><a href="index.html">home</a></li>
+                <li><a href="item_browse.html">popular</a></li>
+                <li><a href="add_food.html">add food</a></li>
+                <li><a href="search_users.html">search users</a> </li>
+            </ul>
+
+        </div>
+        <div class = "col-xs-12 col-md-2 col-md-offset-2 footer_about_us">
+            <h3>about us...</h3>
+            <hr>
+            <ul style="text-align: left">
+                <li><a href="how_we_use_cookies.html">how do we use cookies?</a> </li>
+                <li><a href="privacy_policy.html">privacy policy</a></li>
+                <li><a href="how_we_started.html">how we started</a></li>
+                <li><a href="mission_statement.html">our mission statement </a></li>
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
